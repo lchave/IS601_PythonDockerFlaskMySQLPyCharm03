@@ -1,3 +1,4 @@
 flask
+flask-mysql
 mysql-connector
 simplejson

@@ -18,7 +18,7 @@ mysql.init_app(app)
 
 @app.route('/', methods=['GET'])
 def index():
-    user = {'username': 'Cities Project'}
+    user = {'username': 'Luis'}
     cursor = mysql.get_db().cursor()
     cursor.execute('SELECT * FROM tblCitiesImport')
     result = cursor.fetchall()
@@ -27,18 +27,20 @@ def index():
 
 @app.route('/view/<int:city_id>', methods=['GET'])
 def record_view(city_id):
+    user = {'username': 'Luis'}
     cursor = mysql.get_db().cursor()
     cursor.execute('SELECT * FROM tblCitiesImport WHERE id=%s', city_id)
     result = cursor.fetchall()
-    return render_template('view.html', title='View Form', city=result[0])
+    return render_template('view.html', title='View Form', user=user, city=result[0])
 
 
 @app.route('/edit/<int:city_id>', methods=['GET'])
 def form_edit_get(city_id):
+    user = {'username': 'Luis'}
     cursor = mysql.get_db().cursor()
     cursor.execute('SELECT * FROM tblCitiesImport WHERE id=%s', city_id)
     result = cursor.fetchall()
-    return render_template('edit.html', title='Edit Form', city=result[0])
+    return render_template('edit.html', title='Edit Form', user=user, city=result[0])
 
 
 @app.route('/edit/<int:city_id>', methods=['POST'])
@@ -55,7 +57,8 @@ def form_update_post(city_id):
 
 @app.route('/cities/new', methods=['GET'])
 def form_insert_get():
-    return render_template('new.html', title='New City Form')
+    user = {'username': 'Luis'}
+    return render_template('new.html', title='New City Form', user=user)
 
 
 @app.route('/cities/new', methods=['POST'])
