@@ -46,7 +46,7 @@ def form_edit_get(movie_id):
 @app.route('/edit/<int:movie_id>', methods=['POST'])
 def form_update_post(movie_id):
     cursor = mysql.get_db().cursor()
-    inputData = (request.form.get('Year'), request.form.get('Score'), request.form.get('Title'))
+    inputData = (request.form.get('Year'), request.form.get('Score'), request.form.get('Title'), movie_id)
     sql_update_query = """UPDATE tblMovieImport t SET t.Year = %s, t.Score = %s, t.Title = %s WHERE t.id = %s """
     cursor.execute(sql_update_query, inputData)
     mysql.get_db().commit()
